@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arvind_zx // Chapter 27 Unlocked</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:ital,wght@1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- GSAP CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <!-- Cropper.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { DEFAULT: '#D4AF37', light: '#F3E5AB', dark: '#AA7C11', deep: '#855E0B' }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        digital: ['Orbitron', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            background-color: #0c0a09;
+            color: #f5f5f4;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .cinematic-section {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 40px 15px;
+        }
+
+        .section-blend-top { background: linear-gradient(180deg, #0c0a09 0%, #150c0e 50%, #0c0a09 100%); }
+        .section-blend-bottom { background: radial-gradient(circle at 50% 30%, rgba(66, 15, 24, 0.5) 0%, rgba(18, 12, 15, 0.9) 70%, #0c0a09 100%); }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF6D1 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-shine-anim {
+            background: linear-gradient(110deg, #D4AF37 33%, #FFF6D1 50%, #D4AF37 66%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineSweep 4s ease-in-out infinite;
+        }
+
+        @keyframes shineSweep {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        .curtain-panel {
+            background: linear-gradient(90deg, 
+                #120003 0%, 
+                #3a0008 15%, 
+                #6b0011 30%, 
+                #3a0008 45%, 
+                #1a0004 60%, 
+                #52000d 75%, 
+                #120003 100%);
+            background-size: 90px 100%;
+        }
+        .curtain-left-shadow { box-shadow: inset -30px 0 40px rgba(0, 0, 0, 0.95); }
+        .curtain-right-shadow { box-shadow: inset 30px 0 40px rgba(0, 0, 0, 0.95); }
+
+        .glass-badge {
+            background: rgba(18, 14, 16, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1.5px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.85);
+        }
+
+        /* 👑 3D LUXURY GOLDEN FRAME STYLING */
+        .luxury-gold-frame {
+            border: 4px solid #D4AF37;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.35);
+            background: linear-gradient(135deg, #18120b 0%, #080605 100%);
+            border-radius: 20px;
+            padding: 6px;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .luxury-gold-frame::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 1px solid rgba(243, 229, 171, 0.4);
+            border-radius: 24px;
+            pointer-events: none;
+        }
+
+        /* 👑 LUXURY GOLDEN VIDEO & AUDIO PLAYERS */
+        .luxury-gold-video {
+            width: 100%;
+            max-height: 50vh;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid #D4AF37;
+            background: #000;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-gold-audio-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #1c140c 0%, #0a0806 100%);
+            border: 2px solid #D4AF37;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9), inset 0 0 15px rgba(212,175,55,0.25);
+        }
+
+        .luxury-gold-audio-wrapper audio {
+            width: 100%;
+            height: 40px;
+            accent-color: #D4AF37;
+            outline: none;
+        }
+
+        .reel-frame {
+            position: relative;
+            width: 34px;
+            height: 50px;
+            background: linear-gradient(180deg, #1e1e1e 0%, #0a0a0a 100%);
+            border-radius: 6px;
+            border: 1.5px solid rgba(212, 175, 55, 0.6);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+        }
+
+        @media (min-width: 640px) { .reel-frame { width: 48px; height: 66px; } }
+
+        .reel-track {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: transform;
+        }
+
+        .reel-digit {
+            font-family: 'Orbitron', monospace;
+            font-weight: 800;
+            color: #FFD700;
+            font-size: 26px;
+            height: 50px;
+            line-height: 50px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) { .reel-digit { font-size: 36px; height: 66px; line-height: 66px; } }
+
+        /* 🎰 SLOT MACHINE COUNTER */
+        .age-slot-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            perspective: 1000px;
+        }
+
+        .age-digit-drum {
+            position: relative;
+            width: 90px;
+            height: 130px;
+            background: linear-gradient(180deg, #18120e 0%, #080605 50%, #18120e 100%);
+            border: 3px solid rgba(212, 175, 55, 0.6);
+            border-radius: 16px;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.9), 0 10px 30px rgba(212, 175, 55, 0.25);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .age-digit-drum { width: 130px; height: 180px; border-width: 4px; border-radius: 20px; }
+        }
+
+        .age-drum-track {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: transform;
+        }
+
+        .age-drum-number {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 75px;
+            height: 130px;
+            line-height: 130px;
+            background: linear-gradient(135deg, #FFF6D1 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .age-drum-number { font-size: 110px; height: 180px; line-height: 180px; }
+        }
+
+        .fire-burn-fx {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 120, 0, 0.8) 0%, rgba(255, 40, 0, 0.5) 40%, transparent 80%);
+            mix-blend-mode: screen;
+            filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .balloon-bundle-left, .balloon-bundle-right {
+            position: absolute;
+            bottom: -100px;
+            width: 140px;
+            height: 800px;
+            pointer-events: none;
+            z-index: 15;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .balloon-bundle-left { left: 15px; }
+        .balloon-bundle-right { right: 15px; }
+
+        .realistic-balloon {
+            position: absolute;
+            width: 48px;
+            height: 64px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            box-shadow: inset -8px -8px 18px rgba(0,0,0,0.7), inset 5px 5px 12px rgba(255,255,255,0.4), 0 8px 18px rgba(0,0,0,0.5);
+            animation: floatBalloon 4.5s ease-in-out infinite alternate;
+        }
+
+        .realistic-balloon::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 8px; width: 8px; height: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%; transform: rotate(-35deg); filter: blur(1px);
+        }
+
+        .realistic-balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 21px; width: 5px; height: 7px;
+            background: inherit;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+        }
+
+        .balloon-string {
+            position: absolute;
+            top: 64px; left: 22px; width: 1px; height: 250px;
+            background: linear-gradient(180deg, rgba(212,175,55,0.8), rgba(212,175,55,0.1));
+            transform-origin: top center;
+            animation: swayString 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0px) rotate(-3deg); }
+            100% { transform: translateY(-18px) rotate(4deg); }
+        }
+
+        @keyframes swayString {
+            0% { transform: rotate(-4deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        .balloon-gold { background: radial-gradient(circle at 35% 35%, #FFF6D1 0%, #D4AF37 45%, #6E5311 100%); }
+        .balloon-black { background: radial-gradient(circle at 35% 35%, #52525b 0%, #18181b 50%, #09090b 100%); border: 1px solid rgba(212,175,55,0.4); }
+
+        .section-velvet-blend {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+
+        .feather-top-fade {
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 90px;
+            background: linear-gradient(180deg, #0c0a09 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .feather-bottom-fade {
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 90px;
+            background: linear-gradient(0deg, #0c0a09 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .curved-ribbon-stage {
+            position: relative;
+            width: 100vw;
+            left: 50%; right: 50%;
+            margin-left: -50vw; margin-right: -50vw;
+            height: 320px;
+            overflow-x: auto; overflow-y: hidden;
+            display: flex; align-items: center;
+            scroll-behavior: auto; -webkit-overflow-scrolling: touch;
+            cursor: grab; user-select: none;
+        }
+
+        .curved-ribbon-stage:active { cursor: grabbing; }
+        .curved-ribbon-stage::-webkit-scrollbar { display: none; }
+
+        @media (min-width: 640px) { .curved-ribbon-stage { height: 380px; } }
+
+        .ribbon-flex-track {
+            display: flex; gap: 20px; width: max-content;
+            will-change: transform; padding: 30px 40px;
+        }
+
+        .ribbon-photo-item {
+            flex-shrink: 0; width: 120px; height: 160px;
+            border-radius: 14px; overflow: hidden;
+            border: 1.5px solid rgba(212, 175, 55, 0.55);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.95), 0 0 15px rgba(212, 175, 55, 0.2);
+            transition: transform 0.35s ease, border-color 0.3s ease;
+            cursor: pointer; background: #111;
+        }
+
+        @media (min-width: 640px) { .ribbon-photo-item { width: 155px; height: 210px; } }
+
+        .ribbon-photo-item:nth-child(12n+1)  { transform: translateY(45px) rotate(-5deg); }
+        .ribbon-photo-item:nth-child(12n+2)  { transform: translateY(20px) rotate(-10deg); }
+        .ribbon-photo-item:nth-child(12n+3)  { transform: translateY(-10px) rotate(-15deg); }
+        .ribbon-photo-item:nth-child(12n+4)  { transform: translateY(-50px) rotate(-22deg); }
+        .ribbon-photo-item:nth-child(12n+5)  { transform: translateY(-75px) rotate(-6deg); }
+        .ribbon-photo-item:nth-child(12n+6)  { transform: translateY(-55px) rotate(16deg); }
+        .ribbon-photo-item:nth-child(12n+7)  { transform: translateY(-10px) rotate(26deg); }
+        .ribbon-photo-item:nth-child(12n+8)  { transform: translateY(20px) rotate(15deg); }
+        .ribbon-photo-item:nth-child(12n+9)  { transform: translateY(50px) rotate(8deg); }
+        .ribbon-photo-item:nth-child(12n+10) { transform: translateY(40px) rotate(-2deg); }
+        .ribbon-photo-item:nth-child(12n+11) { transform: translateY(15px) rotate(-6deg); }
+        .ribbon-photo-item:nth-child(12n+12) { transform: translateY(0px) rotate(0deg); }
+
+        .ribbon-photo-item:hover {
+            transform: scale(1.15) translateY(0) rotate(0deg) !important;
+            border-color: rgba(255, 215, 0, 1); z-index: 30;
+            box-shadow: 0 20px 35px rgba(212, 175, 55, 0.45);
+        }
+
+        #sec4WishesContainer {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #sec4WishesContainer.active {
+            opacity: 1;
+        }
+
+        .sec4-bubble {
+            position: absolute;
+            background: rgba(22, 15, 18, 0.96);
+            backdrop-filter: blur(14px);
+            border: 1.5px solid #D4AF37;
+            border-radius: 50px;
+            padding: 8px 18px 8px 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            pointer-events: auto !important;
+            cursor: pointer;
+            width: 230px;
+            max-width: 38vw;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .sec4-bubble:hover {
+            border-color: #FFF;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+            z-index: 60;
+        }
+
+        @keyframes floatFromSec4ToSec1 {
+            0% { transform: translateY(115vh) translateZ(0); opacity: 0; }
+            12% { opacity: 1; }
+            88% { opacity: 1; }
+            100% { transform: translateY(-115vh) translateZ(0); opacity: 0; }
+        }
+
+        /* ✨ SPARKLE & BUTTERFLY GOLDEN ANIMATION FOR EXPANDED MODAL */
+        @keyframes goldShimmer {
+            0%, 100% { border-color: #D4AF37; box-shadow: 0 30px 90px rgba(0,0,0,0.98), 0 0 40px rgba(212,175,55,0.4); }
+            50% { border-color: #FFF6D1; box-shadow: 0 30px 90px rgba(0,0,0,0.98), 0 0 70px rgba(255,246,209,0.8); }
+        }
+
+        @keyframes sparkFloat {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            50% { opacity: 1; transform: translateY(-25px) scale(1.2) rotate(15deg); }
+            100% { transform: translateY(-50px) scale(0.4); opacity: 0; }
+        }
+
+        .gold-sparkle-fx {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #FFF6D1 0%, #D4AF37 60%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkFloat 1.8s ease-in-out infinite;
+        }
+
+        #wishCardModal {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(20px); z-index: 100;
+            display: flex; align-items: center; justify-content: center;
+            padding: 16px; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #wishCardModal.active { opacity: 1; pointer-events: auto; }
+
+        .expanded-wish-card {
+            background: linear-gradient(135deg, rgba(32, 18, 24, 0.98) 0%, rgba(12, 8, 10, 0.99) 100%);
+            border: 3px solid #D4AF37; border-radius: 36px; padding: 28px 24px;
+            max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;
+            animation: goldShimmer 4s infinite ease-in-out;
+            text-align: center; position: relative;
+            transform: scale(0.85); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #wishCardModal.active .expanded-wish-card { transform: scale(1); }
+
+        .eq-bar {
+            width: 3px; background-color: #D4AF37; border-radius: 2px;
+            animation: eqPulse 0.8s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { height: 8px;  animation-delay: 0.2s; }
+
+        @keyframes eqPulse { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1.2); } }
+        .fog-container { background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.15) 0%, transparent 65%); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0c0a09; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-[#0c0a09] text-gray-100 font-sans antialiased selection:bg-gold selection:text-black">
+
+    <div id="sec4WishesContainer"></div>
+
+    <div class="fixed top-4 left-4 right-4 z-50 flex items-center justify-between pointer-events-none">
+        <button onclick="skipToNext()" class="pointer-events-auto px-3.5 py-1.5 bg-red-600/90 hover:bg-red-600 text-white text-[11px] font-bold rounded-full shadow-2xl border border-red-400 transition transform hover:scale-105 flex items-center gap-1.5">
+            <i class="fa-solid fa-bolt"></i> <span>DEV: SKIP / UNLOCK</span>
+        </button>
+
+        <button id="musicBtn" onclick="toggleAudio(event)" class="pointer-events-auto glass-badge px-3 py-1.5 rounded-full text-gold flex items-center gap-2 hover:border-gold transition shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+            <i id="musicIcon" class="fa-solid fa-compact-disc text-sm"></i>
+            <div id="eqContainer" class="flex items-center gap-0.5 h-4 opacity-50">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+            </div>
+        </button>
+    </div>
+    
+    <audio id="bgMusic" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-acoustic-guitar-112317.mp3"></audio>
+
+    <!-- SECTION 1 -->
+    <section id="section1" class="cinematic-section section-blend-top z-40">
+        <canvas id="dustCanvas" class="absolute inset-0 z-35 pointer-events-none opacity-60"></canvas>
+
+        <div id="curtainLeft" class="curtain-panel curtain-left-shadow absolute top-0 left-0 w-[50.5%] h-full z-30 flex items-center justify-end"></div>
+        <div id="curtainRight" class="curtain-panel curtain-right-shadow absolute top-0 right-0 w-[50.5%] h-full z-30 flex items-center justify-start"></div>
+
+        <div id="frontHeader" class="z-40 text-center max-w-4xl mx-auto transition-all duration-700 my-auto flex flex-col items-center w-full px-2">
+            
+            <div class="inline-block border border-gold/40 px-4 py-1.5 rounded-full backdrop-blur-md bg-black/40 text-[10px] sm:text-xs text-gold uppercase tracking-[0.3em] font-semibold mb-3 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                ✨ GRAND PREMIERE ✨
+            </div>
+            
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black gold-shine-anim tracking-wider uppercase text-center w-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]">
+                CHAPTER 27
+            </h1>
+
+            <div class="font-playfair italic text-gold/90 text-base sm:text-2xl mt-1 mb-3 flex items-center justify-center tracking-widest">
+                <span>— Is Loading</span>
+                <span class="inline-block text-left w-[30px] text-gold ml-1">
+                    <span id="loadingDots" class="not-italic font-sans font-bold">.</span>
+                </span>
+                <span>—</span>
+            </div>
+            
+            <div class="glass-badge px-4 py-2 rounded-full mb-5 max-w-[95vw]">
+                <span class="text-gold font-bold text-[9px] sm:text-xs tracking-[0.18em] sm:tracking-[0.25em] uppercase">
+                    ARVIND_ZX OFFICIAL BIRTHDAY COUNTDOWN
+                </span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 my-2 w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto justify-items-center">
+                <div class="flex flex-col items-center w-full">
+                    <div class="flex gap-1.5 p-2 rounded-xl bg-black/90 border border-gold/40 shadow-2xl relative justify-center w-full">
+                        <div class="reel-frame"><div id="d1" class="reel-track"><div class="reel-digit">0</div></div></div>
+                        <div class="reel-frame"><div id="d2" class="reel-track"><div class="reel-digit">0</div></div></div>
+                    </div>
+                    <span class="text-[9px] sm:text-[11px] text-gold/90 font-digital uppercase tracking-widest mt-2 font-bold">DAYS</span>
+                </div>
+                <div class="flex flex-col items-center w-full">
+                    <div class="flex gap-1.5 p-2 rounded-xl bg-black/90 border border-gold/40 shadow-2xl relative justify-center w-full">
+                        <div class="reel-frame"><div id="h1" class="reel-track"><div class="reel-digit">0</div></div></div>
+                        <div class="reel-frame"><div id="h2" class="reel-track"><div class="reel-digit">0</div></div></div>
+                    </div>
+                    <span class="text-[9px] sm:text-[11px] text-gold/90 font-digital uppercase tracking-widest mt-2 font-bold">HRS</span>
+                </div>
+                <div class="flex flex-col items-center w-full">
+                    <div class="flex gap-1.5 p-2 rounded-xl bg-black/90 border border-gold/40 shadow-2xl relative justify-center w-full">
+                        <div class="reel-frame"><div id="m1" class="reel-track"><div class="reel-digit">0</div></div></div>
+                        <div class="reel-frame"><div id="m2" class="reel-track"><div class="reel-digit">0</div></div></div>
+                    </div>
+                    <span class="text-[9px] sm:text-[11px] text-gold/90 font-digital uppercase tracking-widest mt-2 font-bold">MIN</span>
+                </div>
+                <div class="flex flex-col items-center w-full">
+                    <div class="flex gap-1.5 p-2 rounded-xl bg-black/90 border border-gold/40 shadow-2xl relative justify-center w-full">
+                        <div class="reel-frame"><div id="s1" class="reel-track"><div class="reel-digit">0</div></div></div>
+                        <div class="reel-frame"><div id="s2" class="reel-track"><div class="reel-digit">0</div></div></div>
+                    </div>
+                    <span class="text-[9px] sm:text-[11px] text-gold/90 font-digital uppercase tracking-widest mt-2 font-bold">SEC</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishButtonWrapper" class="z-40 text-center mb-6 transition-all duration-700">
+            <button onclick="openWishModal()" class="px-6 py-3 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black font-extrabold uppercase tracking-wider text-[10px] sm:text-xs shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:scale-105 transition duration-300">
+                ✍️ Leave a Birthday Wish for Arvind_zx
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="section2" class="cinematic-section section-blend-bottom fog-container z-20">
+        <div class="absolute top-0 w-96 h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.2)_0%,transparent_70%)] pointer-events-none"></div>
+
+        <div id="balloonBundleLeft" class="balloon-bundle-left">
+            <div class="realistic-balloon balloon-gold" style="bottom: 0px; left: 0px; animation-delay: 0.1s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 25px; left: 30px; animation-delay: 0.8s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 50px; left: 60px; animation-delay: 0.4s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 75px; left: 15px; animation-delay: 1.2s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 100px; left: 45px; animation-delay: 0.6s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 125px; left: 75px; animation-delay: 1.5s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 150px; left: 25px; animation-delay: 0.3s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 175px; left: 55px; animation-delay: 1.8s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 200px; left: 10px; animation-delay: 0.9s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 225px; left: 40px; animation-delay: 1.4s;"><div class="balloon-string"></div></div>
+        </div>
+
+        <div id="balloonBundleRight" class="balloon-bundle-right">
+            <div class="realistic-balloon balloon-black" style="bottom: 0px; right: 0px; animation-delay: 0.3s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 25px; right: 30px; animation-delay: 1s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 50px; right: 60px; animation-delay: 0.6s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 75px; right: 15px; animation-delay: 1.6s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 100px; right: 45px; animation-delay: 0.2s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 125px; right: 75px; animation-delay: 1.1s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 150px; right: 25px; animation-delay: 0.7s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 175px; right: 55px; animation-delay: 1.9s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-black" style="bottom: 200px; right: 10px; animation-delay: 0.5s;"><div class="balloon-string"></div></div>
+            <div class="realistic-balloon balloon-gold" style="bottom: 225px; right: 40px; animation-delay: 1.3s;"><div class="balloon-string"></div></div>
+        </div>
+
+        <div class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-4 z-10 my-auto py-6">
+            <span class="text-gold text-xs md:text-sm font-bold tracking-[0.4em] uppercase mb-3 block">Milestone Transcended</span>
+            
+            <div id="ageContainer" class="my-1 relative flex flex-col items-center justify-center w-full">
+                <div id="fireBurnOverlay" class="fire-burn-fx"></div>
+
+                <div class="age-slot-container">
+                    <div class="age-digit-drum">
+                        <div id="drum1Track" class="age-drum-track">
+                            <div class="age-drum-number">0</div>
+                            <div class="age-drum-number">1</div>
+                            <div class="age-drum-number">2</div>
+                            <div class="age-drum-number">3</div>
+                            <div class="age-drum-number">4</div>
+                            <div class="age-drum-number">5</div>
+                            <div class="age-drum-number">6</div>
+                            <div class="age-drum-number">7</div>
+                            <div class="age-drum-number">8</div>
+                            <div class="age-drum-number">9</div>
+                            <div class="age-drum-number">2</div>
+                        </div>
+                    </div>
+                    <div class="age-digit-drum">
+                        <div id="drum2Track" class="age-drum-track">
+                            <div class="age-drum-number">0</div>
+                            <div class="age-drum-number">1</div>
+                            <div class="age-drum-number">2</div>
+                            <div class="age-drum-number">3</div>
+                            <div class="age-drum-number">4</div>
+                            <div class="age-drum-number">5</div>
+                            <div class="age-drum-number">6</div>
+                            <div class="age-drum-number">7</div>
+                            <div class="age-drum-number">8</div>
+                            <div class="age-drum-number">9</div>
+                            <div class="age-drum-number">0</div>
+                            <div class="age-drum-number">1</div>
+                            <div class="age-drum-number">2</div>
+                            <div class="age-drum-number">3</div>
+                            <div class="age-drum-number">4</div>
+                            <div class="age-drum-number">5</div>
+                            <div class="age-drum-number">6</div>
+                            <div class="age-drum-number">7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tapPrompt" class="mt-3 opacity-0 transition-opacity duration-700">
+                    <span class="text-[11px] md:text-xs text-gold/80 tracking-widest uppercase font-mono animate-pulse border border-gold/30 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md">
+                        ✨ Tap here to Ignite Chapter 27 ✨
+                    </span>
+                </div>
+            </div>
+
+            <div id="bdayBanner" class="opacity-0 transform translate-y-10 transition duration-1000 mt-4 w-full flex flex-col items-center justify-center text-center">
+                <h2 class="font-cinzel text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-wider mb-2 w-full text-center">
+                    🎉 HAPPY BIRTHDAY <span class="gold-gradient-text">ARVIND_ZX</span> 🎉
+                </h2>
+                <p class="text-gray-400 text-xs md:text-sm max-w-lg mx-auto text-center">Welcome to the elite era of growth, wisdom, and boundless success.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="section3" class="cinematic-section section-velvet-blend z-25">
+        <div class="feather-top-fade"></div>
+        <div class="feather-bottom-fade"></div>
+
+        <div class="w-full max-w-4xl text-center z-20 mb-2 md:mb-3 px-4">
+            <div class="inline-block border border-gold/40 px-3.5 py-1 rounded-full backdrop-blur-md bg-black/40 text-[10px] sm:text-xs text-gold uppercase tracking-[0.3em] font-semibold mb-2 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                👑 CHAPTER 27 // MEMORY GALLERY
+            </div>
+
+            <h2 class="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-white mb-2 leading-tight tracking-wider">
+                HAPPY BIRTHDAY <span class="gold-gradient-text">TO ME</span>
+            </h2>
+        </div>
+
+        <div class="w-full max-w-3xl z-20 px-6 mb-3 text-center">
+            <blockquote class="font-sans font-extrabold text-gray-100 text-sm sm:text-lg uppercase tracking-wide leading-relaxed drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)]">
+                "STEPPING INTO MY PRIME WITH RELENTLESS DRIVE, SILENT POWER, AND ZERO LIMITS. THE LEGACY CONTINUES."
+            </blockquote>
+            <p class="mt-2 text-xs sm:text-sm text-gold font-sans uppercase tracking-[0.35em] font-black">— ARVIND_ZX</p>
+        </div>
+
+        <div class="text-[11px] text-gold/80 font-mono tracking-widest uppercase mb-3 flex items-center gap-2 animate-pulse">
+            <i class="fa-solid fa-arrows-left-right"></i> <span>Drag Horizontally to Explore Gallery</span>
+        </div>
+
+        <div class="w-full z-20 overflow-hidden">
+            <div id="ribbonStage" class="curved-ribbon-stage">
+                <div id="singleRibbonTrack" class="ribbon-flex-track"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="section4" class="cinematic-section section-blend-top z-25">
+        <div class="text-center z-30 glass-badge px-8 py-6 rounded-3xl border border-gold/40 shadow-2xl max-w-xl mx-auto relative mt-20">
+            <h2 class="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold gold-gradient-text mb-2">GALAXY OF BLESSINGS</h2>
+            <p class="text-gray-300 text-xs sm:text-sm mb-4">Wishes flow smoothly across Left, Center, and Right! Click any bubble to read details.</p>
+            
+            <div class="flex items-center justify-center gap-3">
+                <button onclick="openWishModal()" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black font-extrabold uppercase tracking-widest text-xs shadow-lg hover:scale-105 transition">
+                    ✍️ Add Your Wish
+                </button>
+
+                <button onclick="openSecretLoginModal()" class="px-3 py-2.5 rounded-full bg-neutral-900 border border-gold/50 text-gold font-bold uppercase text-[10px] shadow-lg hover:bg-gold hover:text-black transition flex items-center gap-1.5" title="Arvind's Private Vault Login">
+                    <i class="fa-solid fa-lock text-xs"></i> <span>Vault</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECRET LOGIN MODAL -->
+    <div id="secretLoginModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center hidden px-4 py-6">
+        <div class="glass-badge w-full max-w-sm p-6 rounded-3xl relative border-2 border-gold shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+            <button onclick="closeSecretLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <h3 class="font-cinzel text-xl font-bold gold-gradient-text mb-1 text-center"><i class="fa-solid fa-shield-halved mr-1"></i> ARVIND'S VAULT</h3>
+            <p class="text-gray-400 text-[11px] mb-5 text-center">Enter credentials to view secret private wishes</p>
+            
+            <form onsubmit="handleSecretLogin(event)" class="space-y-3.5">
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Username</label>
+                    <input type="text" id="loginUser" required autocomplete="off" placeholder="Enter username" class="w-full bg-neutral-900/90 border border-gold/30 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold">
+                </div>
+
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Password</label>
+                    <input type="password" id="loginPass" required autocomplete="new-password" placeholder="Enter password" class="w-full bg-neutral-900/90 border border-gold/30 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold">
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black font-extrabold uppercase tracking-wider text-xs rounded-xl shadow-lg hover:scale-[1.02] transition">
+                    Unlock Private Vault 🔓
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PRIVATE VAULT MODAL -->
+    <div id="privateVaultModal" class="fixed inset-0 bg-black/95 backdrop-blur-2xl z-50 flex items-center justify-center hidden px-4 py-8 overflow-y-auto">
+        <div class="glass-badge w-full max-w-3xl p-6 sm:p-8 rounded-3xl relative border-2 border-gold shadow-[0_0_60px_rgba(212,175,55,0.6)] my-auto">
+            <button onclick="closePrivateVault()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <h2 class="font-cinzel text-2xl sm:text-3xl font-bold gold-gradient-text mb-1 text-center">🔒 SECRET PRIVATE VAULT</h2>
+            <p class="text-gray-400 text-xs mb-6 text-center">Only you (Arvind) can see these private messages and media gifts</p>
+            
+            <div id="privateVaultContainer" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"></div>
+        </div>
+    </div>
+
+    <!-- EXPANDED WISH CARD POPUP MODAL -->
+    <div id="wishCardModal" onclick="closeExpandedWish(event)">
+        <div class="expanded-wish-card" onclick="event.stopPropagation()">
+            <!-- Golden Sparkles / Butterfly particles -->
+            <div class="gold-sparkle-fx" style="top: 10px; left: 10px;"></div>
+            <div class="gold-sparkle-fx" style="top: 10px; right: 10px; animation-delay: 0.5s;"></div>
+            <div class="gold-sparkle-fx" style="bottom: 10px; left: 15px; animation-delay: 1s;"></div>
+            <div class="gold-sparkle-fx" style="bottom: 10px; right: 15px; animation-delay: 1.2s;"></div>
+
+            <button onclick="closeExpandedWish()" class="absolute top-4 right-4 text-gold hover:text-white transition z-10 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="expandedMediaContainer" class="w-full mb-4 flex items-center justify-center rounded-2xl overflow-hidden luxury-gold-frame bg-black"></div>
+
+            <p id="expandedMessage" class="text-gray-100 text-base sm:text-lg italic leading-relaxed mb-4 px-2 text-left"></p>
+
+            <div class="w-full flex items-center gap-3.5 border-t border-gold/30 pt-3 mt-2">
+                <img id="expandedAvatar" class="w-12 h-12 rounded-full border-2 border-gold object-cover shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                <div class="text-left flex flex-col">
+                    <h3 id="expandedName" class="font-cinzel text-lg font-bold gold-gradient-text"></h3>
+                    <span class="text-[10px] text-gold/70 uppercase tracking-widest font-mono">Chapter 27 Blessing</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WISH CREATION MODAL -->
+    <div id="wishModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center hidden px-4 py-6 overflow-y-auto">
+        <div class="glass-badge w-full max-w-md p-6 rounded-3xl relative border border-gold/40 my-auto shadow-[0_0_30px_rgba(212,175,55,0.25)]">
+            <button onclick="closeWishModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <h3 class="font-cinzel text-2xl font-bold gold-gradient-text mb-1">Send Birthday Wish</h3>
+            <p class="text-gray-400 text-xs mb-4">Set your profile photo and attach special gift media!</p>
+            
+            <form onsubmit="handleFormSubmit(event)" class="space-y-3.5">
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Your Name</label>
+                    <input type="text" id="senderName" required placeholder="Enter your name" class="w-full bg-neutral-900/90 border border-gold/25 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold">
+                </div>
+
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Your Message</label>
+                    <textarea id="senderMsg" rows="3" required placeholder="Write a birthday message..." class="w-full bg-neutral-900/90 border border-gold/25 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold"></textarea>
+                </div>
+
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Your Profile Photo (Bubble Fit)</label>
+                    <input type="file" id="avatarFileInput" accept="image/*" onchange="openAvatarCropModal(event)" class="w-full bg-neutral-900/90 border border-gold/25 rounded-xl px-3 py-2 text-[11px] text-gray-300 file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-bold file:bg-gold file:text-black hover:file:bg-gold-light cursor-pointer">
+                </div>
+
+                <div id="avatarPreviewBox" class="hidden flex items-center gap-3 p-2 border border-gold/40 rounded-xl bg-black/60">
+                    <img id="avatarThumbnail" class="w-10 h-10 rounded-full border border-gold object-cover">
+                    <span class="text-xs text-gold font-bold">Profile Photo Set!</span>
+                    <button type="button" onclick="document.getElementById('avatarFileInput').click()" class="ml-auto text-[10px] text-gray-300 underline">Change</button>
+                </div>
+
+                <div class="p-3 bg-neutral-900/80 border border-gold/30 rounded-xl flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-gold block">Send Option</span>
+                        <span class="text-[10px] text-gray-400" id="privacyDesc">Public (Floats on screen for everyone)</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="privateToggle" onchange="togglePrivacyMode(this)" class="sr-only peer">
+                        <div class="w-11 h-6 bg-neutral-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold"></div>
+                    </label>
+                </div>
+
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-gold tracking-wider block mb-1">Attach Gift Media (Photo / Video / Audio)</label>
+                    <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" onchange="openGiftCropModal(event)" class="w-full bg-neutral-900/90 border border-gold/25 rounded-xl px-3 py-2 text-[11px] text-gray-300 file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-bold file:bg-gold file:text-black hover:file:bg-gold-light cursor-pointer">
+                </div>
+
+                <div id="giftPreviewBox" class="hidden flex items-center gap-3 p-2 border border-gold/40 rounded-xl bg-black/60">
+                    <div id="giftThumbContainer" class="w-12 h-10 rounded border border-gold overflow-hidden flex items-center justify-center bg-black"></div>
+                    <span id="giftThumbName" class="text-xs text-gold font-bold truncate max-w-[180px]">Media Attached!</span>
+                    <button type="button" onclick="document.getElementById('mediaInput').click()" class="ml-auto text-[10px] text-gray-300 underline">Change</button>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black font-extrabold uppercase tracking-wider text-xs rounded-xl shadow-lg hover:scale-[1.02] transition">
+                    Lock My Wish 🔒
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CROPPER MODAL -->
+    <div id="cropModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-badge w-full max-w-md p-6 rounded-3xl border-2 border-gold text-center relative shadow-[0_0_50px_rgba(212,175,55,0.5)]">
+            <h3 class="font-cinzel text-xl font-bold gold-gradient-text mb-2">Adjust & Fit Photo</h3>
+            <p class="text-gray-300 text-xs mb-4">Drag, pinch or zoom to frame your photo perfectly!</p>
+            
+            <div class="relative w-full h-[280px] bg-black rounded-2xl overflow-hidden border border-gold/40 flex items-center justify-center mb-5">
+                <img id="cropperTargetImage" style="max-width: 100%;">
+            </div>
+
+            <div class="flex items-center justify-center gap-4">
+                <button type="button" onclick="cancelCrop()" class="px-6 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-gray-300 text-xs font-bold rounded-xl border border-gray-600 transition">Cancel</button>
+                <button type="button" onclick="confirmCrop()" class="px-8 py-2.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black text-xs font-extrabold rounded-xl shadow-lg hover:scale-105 transition">OK / Set</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center hidden p-4" onclick="closeLightbox()">
+        <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded-2xl border-2 border-gold shadow-2xl object-contain">
+    </div>
+
+    <!-- Script Engine -->
+    <script>
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'auto'; }
+
+        const targetDate = new Date("August 19, 2026 00:00:00 GMT+0530").getTime();
+        let isUnlocked = false;
+
+        const targetUserHash = "8e95088f12a3861214300305a41549646b5a7a7b8ea79d5904d0ef92540b9cd1"; 
+        const targetPassHash = "9d9016e7804918e69d7a229a4a75344d5c9533ebf37bf9ed409139ec4c2780bb";
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        let publicWishes = [
+            { name: "Aman Verma", text: "Happy 27th Birthday Arvind! Massive success ahead!", avatar: "https://picsum.photos/seed/user1/200/200", mediaType: "image", mediaSrc: "https://picsum.photos/seed/wish1/800/500" },
+            { name: "Priya Sharma", text: "Keep crushing your goals. Happy Level 27!", avatar: "https://picsum.photos/seed/user2/200/200", mediaType: "video", mediaSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { name: "Rahul", text: "Silent power moves only. Have a legendary birthday, bhai!", avatar: "https://picsum.photos/seed/user3/200/200", mediaType: "audio", mediaSrc: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c3658a1d.mp3?filename=birthday-107775.mp3" },
+            { name: "Neha", text: "Party hard tonight! So proud of you.", avatar: "https://picsum.photos/seed/user4/200/200", mediaType: "image", mediaSrc: "https://picsum.photos/seed/wish2/800/500" },
+            { name: "Vikram", text: "To infinity and beyond! Happy Birthday!", avatar: "https://picsum.photos/seed/user5/200/200", mediaType: "image", mediaSrc: "https://picsum.photos/seed/wish3/800/500" }
+        ];
+
+        let privateWishes = [{ name: "Secret Admirer", text: "Wishing the best coder an incredible birthday!", avatar: "https://picsum.photos/seed/secret1/200/200", mediaType: "image", mediaSrc: "https://picsum.photos/seed/secret1/800/500" }];
+
+        function togglePrivacyMode(checkbox) {
+            const desc = document.getElementById('privacyDesc');
+            if (checkbox.checked) {
+                desc.innerText = "🔒 Private (Sent strictly & securely to Arvind only)";
+                desc.style.color = "#D4AF37";
+            } else {
+                desc.innerText = "Public (Floats on screen for everyone)";
+                desc.style.color = "#9ca3af";
+            }
+        }
+
+        function openSecretLoginModal() { document.getElementById('secretLoginModal').classList.remove('hidden'); }
+        function closeSecretLoginModal() { document.getElementById('secretLoginModal').classList.add('hidden'); document.getElementById('loginUser').value = ''; document.getElementById('loginPass').value = ''; }
+
+        async function handleSecretLogin(e) {
+            e.preventDefault();
+            const uInput = document.getElementById('loginUser').value.trim();
+            const pInput = document.getElementById('loginPass').value.trim();
+            const uHash = await sha256(uInput);
+            const pHash = await sha256(pInput);
+            if (uHash === targetUserHash && pHash === targetPassHash) {
+                closeSecretLoginModal(); openPrivateVault();
+            } else { alert("❌ Incorrect Credentials! Access Denied."); }
+        }
+
+        function openPrivateVault() {
+            const container = document.getElementById('privateVaultContainer');
+            container.innerHTML = '';
+            if (privateWishes.length === 0) {
+                container.innerHTML = `<p class="text-gray-400 text-sm text-center py-6">No private wishes in the vault yet.</p>`;
+            } else {
+                privateWishes.forEach(wish => {
+                    let mediaHTML = '';
+                    if (wish.mediaType === 'image') mediaHTML = `<div class="luxury-gold-frame mb-3"><img src="${wish.mediaSrc}" class="w-full max-h-48 object-cover rounded-lg"></div>`;
+                    else if (wish.mediaType === 'video') mediaHTML = `<div class="luxury-gold-frame mb-3 bg-black"><video src="${wish.mediaSrc}" controls class="w-full max-h-48 object-cover rounded-lg"></video></div>`;
+                    else if (wish.mediaType === 'audio') mediaHTML = `<div class="custom-gold-audio mb-3"><audio src="${wish.mediaSrc}" controls></audio></div>`;
+                    container.innerHTML += `
+                        <div class="p-4 rounded-2xl bg-black/60 border border-gold/40 text-left">
+                            <div class="flex items-center gap-3 mb-2">
+                                <img src="${wish.avatar}" class="w-8 h-8 rounded-full border border-gold object-cover">
+                                <span class="font-cinzel font-bold text-gold text-sm">${wish.name}</span>
+                                <span class="text-[9px] font-mono text-gold/70 uppercase ml-auto">🔒 Private Gift</span>
+                            </div>
+                            ${mediaHTML}<p class="text-gray-200 text-xs italic">"${wish.text}"</p>
+                        </div>`;
+                });
+            }
+            document.getElementById('privateVaultModal').classList.remove('hidden');
+        }
+
+        function closePrivateVault() {
+            document.getElementById('privateVaultModal').classList.add('hidden');
+            document.querySelectorAll('#privateVaultContainer video, #privateVaultContainer audio').forEach(el => el.pause());
+        }
+
+        let activeCropper = null;
+        let cropTargetType = 'avatar';
+        let finalizedAvatarUrl = "https://picsum.photos/seed/default/200/200";
+        let finalizedGiftUrl = "";
+        let finalizedGiftType = "image";
+
+        function openAvatarCropModal(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            cropTargetType = 'avatar';
+            const modal = document.getElementById('cropModal');
+            const image = document.getElementById('cropperTargetImage');
+            modal.classList.remove('hidden');
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                image.src = event.target.result;
+                if (activeCropper) activeCropper.destroy();
+                activeCropper = new Cropper(image, { aspectRatio: 1, viewMode: 1, dragMode: 'move', autoCropArea: 0.9, responsive: true });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function openGiftCropModal(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.type.startsWith('video/') || file.type.startsWith('audio/')) {
+                finalizedGiftType = file.type.startsWith('video/') ? 'video' : 'audio';
+                finalizedGiftUrl = URL.createObjectURL(file);
+                document.getElementById('giftPreviewBox').classList.remove('hidden');
+                document.getElementById('giftThumbName').innerText = file.name;
+                document.getElementById('giftThumbContainer').innerHTML = `<i class="fa-solid ${finalizedGiftType === 'video' ? 'fa-video' : 'fa-music'} text-gold text-lg"></i>`;
+                return;
+            }
+
+            cropTargetType = 'gift';
+            finalizedGiftType = 'image';
+            const modal = document.getElementById('cropModal');
+            const image = document.getElementById('cropperTargetImage');
+            modal.classList.remove('hidden');
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                image.src = event.target.result;
+                if (activeCropper) activeCropper.destroy();
+                activeCropper = new Cropper(image, { aspectRatio: NaN, viewMode: 1, dragMode: 'move', autoCropArea: 0.9, responsive: true });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function cancelCrop() {
+            document.getElementById('cropModal').classList.add('hidden');
+            if (activeCropper) { activeCropper.destroy(); activeCropper = null; }
+        }
+
+        function confirmCrop() {
+            if (!activeCropper) return;
+            activeCropper.getCroppedCanvas({ width: 1000, height: 1000 }).toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                if (cropTargetType === 'avatar') {
+                    finalizedAvatarUrl = url;
+                    document.getElementById('avatarPreviewBox').classList.remove('hidden');
+                    document.getElementById('avatarThumbnail').src = url;
+                } else {
+                    finalizedGiftUrl = url;
+                    document.getElementById('giftPreviewBox').classList.remove('hidden');
+                    document.getElementById('giftThumbName').innerText = "Framed Photo Set";
+                    document.getElementById('giftThumbContainer').innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
+                }
+                cancelCrop();
+            });
+        }
+
+        function playGlassPopSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const popCtx = new AudioContext();
+                if (popCtx.state === 'suspended') popCtx.resume();
+                const osc = popCtx.createOscillator();
+                const gain = popCtx.createGain();
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(900, popCtx.currentTime); 
+                osc.frequency.exponentialRampToValueAtTime(180, popCtx.currentTime + 0.14);
+                gain.gain.setValueAtTime(0.35, popCtx.currentTime); 
+                gain.gain.exponentialRampToValueAtTime(0.001, popCtx.currentTime + 0.14);
+                osc.connect(gain); gain.connect(popCtx.destination);
+                osc.start(); osc.stop(popCtx.currentTime + 0.15);
+            } catch(e) {}
+        }
+
+        let lastZoneIndex = -1;
+
+        function initSection4WishesFlow() {
+            const container = document.getElementById('sec4WishesContainer');
+            const section4 = document.getElementById('section4');
+
+            function spawnBubble() {
+                if (!section4) return;
+                const rect = section4.getBoundingClientRect();
+                if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+                    const b = document.createElement('div');
+                    b.className = 'sec4-bubble';
+                    
+                    const zones = [
+                        () => 5 + Math.random() * 20,   
+                        () => 36 + Math.random() * 22,  
+                        () => 68 + Math.random() * 20   
+                    ];
+                    
+                    let nextZoneIdx = (lastZoneIndex + 1) % zones.length;
+                    lastZoneIndex = nextZoneIdx;
+                    
+                    b.style.left = `${zones[nextZoneIdx]()}%`;
+                    
+                    const randomWish = publicWishes[Math.floor(Math.random() * publicWishes.length)];
+
+                    b.innerHTML = `
+                        <img src="${randomWish.avatar}" class="w-9 h-9 rounded-full border-2 border-gold object-cover flex-shrink-0">
+                        <div class="flex flex-col text-left overflow-hidden">
+                            <span class="font-cinzel font-bold text-gold text-[11px]">${randomWish.name}</span>
+                            <span class="text-[10px] text-gray-100 whitespace-nowrap overflow-hidden text-ellipsis">"${randomWish.text}"</span>
+                        </div>
+                    `;
+
+                    b.style.animation = `floatFromSec4ToSec1 18s linear forwards`;
+                    
+                    const openWishAction = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        playGlassPopSound();
+                        showExpandedWish(randomWish);
+                    };
+
+                    b.addEventListener('click', openWishAction);
+                    b.addEventListener('touchstart', openWishAction, { passive: false });
+                    
+                    container.appendChild(b);
+                    setTimeout(() => b.remove(), 18000);
+                }
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) { container.classList.add('active'); } 
+                else { container.classList.remove('active'); }
+            }, { threshold: 0.1 });
+
+            observer.observe(section4);
+            setInterval(spawnBubble, 2200);
+        }
+        window.addEventListener('load', initSection4WishesFlow);
+
+        let wasMusicPlayingBeforeModal = false;
+
+        function showExpandedWish(wish) {
+            document.getElementById('expandedAvatar').src = wish.avatar;
+            document.getElementById('expandedName').innerText = wish.name;
+            document.getElementById('expandedMessage').innerText = `"${wish.text}"`;
+            const mediaContainer = document.getElementById('expandedMediaContainer');
+            mediaContainer.innerHTML = '';
+            
+            const bgMusic = document.getElementById('bgMusic');
+            if (!bgMusic.paused) {
+                wasMusicPlayingBeforeModal = true; bgMusic.pause();
+                document.getElementById('musicIcon').classList.remove('animate-spin'); document.getElementById('eqContainer').classList.add('opacity-50');
+            } else { wasMusicPlayingBeforeModal = false; }
+
+            if (wish.mediaType === 'image') {
+                mediaContainer.innerHTML = `<img src="${wish.mediaSrc}" class="w-full max-h-[50vh] object-cover rounded-lg">`;
+            } else if (wish.mediaType === 'video') {
+                mediaContainer.innerHTML = `<video src="${wish.mediaSrc}" controls autoplay playsinline class="w-full max-h-[50vh] object-cover rounded-lg bg-black"></video>`;
+            } else if (wish.mediaType === 'audio') {
+                mediaContainer.innerHTML = `<div class="custom-gold-audio"><audio src="${wish.mediaSrc}" controls autoplay></audio></div>`;
+            } else {
+                mediaContainer.innerHTML = `<img src="${wish.avatar}" class="w-32 h-36 rounded-lg object-cover">`;
+            }
+
+            document.getElementById('wishCardModal').classList.add('active');
+        }
+
+        function closeExpandedWish(e) {
+            if (!e || e.target.id === 'wishCardModal' || e.target.closest('button')) {
+                document.querySelectorAll('#expandedMediaContainer video, #expandedMediaContainer audio').forEach(el => el.pause());
+                document.getElementById('wishCardModal').classList.remove('active');
+                if (wasMusicPlayingBeforeModal) {
+                    const bgMusic = document.getElementById('bgMusic');
+                    bgMusic.play().then(() => { document.getElementById('musicIcon').classList.add('animate-spin'); document.getElementById('eqContainer').classList.remove('opacity-50'); }).catch(() => {});
+                }
+            }
+        }
+
+        let audioCtx = null;
+        function playClockTickSound() {
+            if (isUnlocked) return;
+            try {
+                if (!audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; audioCtx = new AudioContext(); }
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(1200, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.03);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.035);
+            } catch(e) {}
+        }
+
+        function toggleAudio(e) {
+            if (e) e.stopPropagation();
+            const bgMusic = document.getElementById('bgMusic'); const musicIcon = document.getElementById('musicIcon'); const eq = document.getElementById('eqContainer');
+            if (bgMusic.paused) { bgMusic.play().then(() => { musicIcon.classList.add('animate-spin'); eq.classList.remove('opacity-50'); }).catch(() => {}); } 
+            else { bgMusic.pause(); musicIcon.classList.remove('animate-spin'); eq.classList.add('opacity-50'); }
+        }
+
+        window.addEventListener('click', () => {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic.paused) { bgMusic.play().then(() => { document.getElementById('musicIcon').classList.add('animate-spin'); document.getElementById('eqContainer').classList.remove('opacity-50'); }).catch(() => {}); }
+        }, { once: true });
+
+        const canvas = document.getElementById('dustCanvas'); const ctx = canvas.getContext('2d'); let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 0.5; this.speedY = Math.random() * -0.6 - 0.2; this.speedX = Math.random() * 0.4 - 0.2; this.opacity = Math.random() * 0.7 + 0.3; }
+            update() { this.y += this.speedY; this.x += this.speedX; if (this.y < 0) this.y = canvas.height; if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width; }
+            draw() { ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        for (let i = 0; i < 40; i++) { particles.push(new Particle()); }
+        function animateDust() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateDust); }
+        animateDust();
+
+        let dotCount = 1;
+        setInterval(() => { dotCount = (dotCount % 3) + 1; document.getElementById('loadingDots').innerText = '.'.repeat(dotCount); }, 500);
+
+        function renderSingleRibbonGallery() {
+            const track = document.getElementById('singleRibbonTrack'); track.innerHTML = ''; let itemsHTML = '';
+            for(let i = 1; i <= 12; i++) { itemsHTML += `<div class="ribbon-photo-item" onclick="openLightbox('https://picsum.photos/seed/arvind${i}/400/500')"><img src="https://picsum.photos/seed/arvind${i}/400/500" class="w-full h-full object-cover"></div>`; }
+            track.innerHTML = itemsHTML + itemsHTML + itemsHTML;
+        }
+        renderSingleRibbonGallery();
+
+        const ribbonStage = document.getElementById('ribbonStage'); const ribbonTrack = document.getElementById('singleRibbonTrack');
+        let scrollPos = 0; let isHovered = false; let isDragging = false; let startX; let scrollLeftStart;
+
+        ribbonStage.addEventListener('mouseenter', () => { isHovered = true; }); ribbonStage.addEventListener('mouseleave', () => { isHovered = false; isDragging = false; });
+        ribbonStage.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX; scrollLeftStart = ribbonStage.scrollLeft; });
+        window.addEventListener('mouseup', () => { isDragging = false; }); window.addEventListener('mousemove', (e) => { if (!isDragging) return; e.preventDefault(); const walk = (e.pageX - startX) * 2; ribbonStage.scrollLeft = scrollLeftStart - walk; scrollPos = ribbonStage.scrollLeft; });
+        ribbonStage.addEventListener('touchstart', (e) => { isDragging = true; startX = e.touches[0].pageX; scrollLeftStart = ribbonStage.scrollLeft; }, { passive: true });
+        window.addEventListener('touchend', () => { isDragging = false; }, { passive: true });
+        ribbonStage.addEventListener('touchmove', (e) => { if (!isDragging) return; const walk = (e.touches[0].pageX - startX) * 2; ribbonStage.scrollLeft = scrollLeftStart - walk; scrollPos = ribbonStage.scrollLeft; }, { passive: true });
+
+        function animateRibbonLoop() {
+            if (!isDragging) { scrollPos += (!isHovered) ? 0.8 : 0.2; const halfWidth = ribbonTrack.scrollWidth / 3; if (scrollPos >= halfWidth) scrollPos = 0; else if (scrollPos < 0) scrollPos = halfWidth; ribbonStage.scrollLeft = scrollPos; } 
+            else { scrollPos = ribbonStage.scrollLeft; } requestAnimationFrame(animateRibbonLoop);
+        }
+        requestAnimationFrame(animateRibbonLoop);
+
+        function openLightbox(src) { document.getElementById('lightboxImg').src = src; document.getElementById('lightboxModal').classList.remove('hidden'); }
+        function closeLightbox() { document.getElementById('lightboxModal').classList.add('hidden'); }
+
+        let prevValues = { d1:'', d2:'', h1:'', h2:'', m1:'', m2:'', s1:'', s2:'' };
+        function updateDigit(trackId, newVal) {
+            if (prevValues[trackId] === newVal) return; prevValues[trackId] = newVal;
+            const track = document.getElementById(trackId); if (!track) return;
+            if (trackId === 's2') { playClockTickSound(); }
+            const cardHeight = window.innerWidth >= 640 ? 66 : 50;
+            const newElem = document.createElement('div'); newElem.className = 'reel-digit'; newElem.innerText = newVal;
+            track.insertBefore(newElem, track.firstChild);
+            gsap.set(track, { y: -cardHeight });
+            gsap.to(track, { y: 0, duration: 0.38, ease: "power2.out", onComplete: () => { while (track.children.length > 1) track.removeChild(track.lastChild); } });
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime(); const difference = targetDate - now;
+            if (difference <= 0) { ['d1','d2','h1','h2','m1','m2','s1','s2'].forEach(id => updateDigit(id, '0')); } 
+            else {
+                const d = String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2, '0'); const h = String(Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                const m = String(Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0'); const s = String(Math.floor((difference % (1000 * 60)) / 1000)).padStart(2, '0');
+                updateDigit('d1', d[0]); updateDigit('d2', d[1]); updateDigit('h1', h[0]); updateDigit('h2', h[1]); updateDigit('m1', m[0]); updateDigit('m2', m[1]); updateDigit('s1', s[0]); updateDigit('s2', s[1]);
+            }
+        }
+        updateCountdown(); setInterval(updateCountdown, 1000);
+
+        function triggerCurtainAndUnlock() {
+            if (isUnlocked) return; isUnlocked = true;
+            
+            gsap.to(['#frontHeader', '#wishButtonWrapper'], { opacity: 0, y: -30, duration: 0.8, onComplete: () => {
+                gsap.to('#curtainLeft', { xPercent: -125, duration: 2.2, ease: 'power4.inOut' });
+                gsap.to('#curtainRight', { xPercent: 125, duration: 2.2, ease: 'power4.inOut', onComplete: startAgeCounterSlotMachine });
+            }});
+        }
+
+        function startAgeCounterSlotMachine() {
+            const sec2 = document.getElementById('section2');
+            sec2.scrollIntoView({ behavior: 'smooth' });
+
+            const drum1Track = document.getElementById('drum1Track');
+            const drum2Track = document.getElementById('drum2Track');
+            const tapPrompt = document.getElementById('tapPrompt');
+            const fireBurnOverlay = document.getElementById('fireBurnOverlay');
+            const bdayBanner = document.getElementById('bdayBanner');
+
+            const itemHeight = window.innerWidth >= 768 ? 180 : 130;
+
+            const targetY1 = -(10 * itemHeight);
+            const targetY2 = -(15 * itemHeight);
+
+            gsap.to(drum1Track, { y: targetY1, duration: 2.5, ease: "power3.inOut" });
+            gsap.to(drum2Track, { y: targetY2, duration: 2.8, ease: "power3.inOut", onComplete: () => {
+                tapPrompt.classList.remove('opacity-0');
+                tapPrompt.style.cursor = 'pointer';
+
+                const triggerIgnition = () => {
+                    document.getElementById('ageContainer').removeEventListener('click', triggerIgnition);
+                    document.getElementById('ageContainer').removeEventListener('touchstart', triggerIgnition);
+
+                    tapPrompt.style.opacity = '0';
+
+                    gsap.to(fireBurnOverlay, { opacity: 0.9, duration: 0.6, yoyo: true, repeat: 1 });
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 } });
+
+                    const finalY2 = -(16 * itemHeight);
+                    gsap.to(drum2Track, { y: finalY2, duration: 1.2, ease: "elastic.out(1, 0.5)" });
+
+                    setTimeout(() => {
+                        gsap.to(fireBurnOverlay, { opacity: 0, duration: 1 });
+                        confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
+
+                        document.getElementById('balloonBundleLeft').style.opacity = '1'; 
+                        document.getElementById('balloonBundleRight').style.opacity = '1';
+                        gsap.to('#balloonBundleLeft', { y: -1200, duration: 6.5, ease: 'power1.out' });
+                        gsap.to('#balloonBundleRight', { y: -1200, duration: 6.8, ease: 'power1.out' });
+
+                        bdayBanner.classList.remove('opacity-0', 'translate-y-10');
+                    }, 1000);
+                };
+
+                document.getElementById('ageContainer').addEventListener('click', triggerIgnition);
+                document.getElementById('ageContainer').addEventListener('touchstart', triggerIgnition, { passive: true });
+            }});
+        }
+
+        function skipToNext() { triggerCurtainAndUnlock(); }
+        function openWishModal() { document.getElementById('wishModal').classList.remove('hidden'); }
+        function closeWishModal() { document.getElementById('wishModal').classList.add('hidden'); }
+
+        function handleFormSubmit(e) { 
+            e.preventDefault(); 
+            const name = document.getElementById('senderName').value; 
+            const msg = document.getElementById('senderMsg').value; 
+            const isPrivate = document.getElementById('privateToggle').checked; 
+            
+            finalizeWishPush(name, msg, isPrivate);
+        }
+
+        function finalizeWishPush(name, msg, isPrivate) {
+            if (!finalizedGiftUrl) finalizedGiftUrl = "https://picsum.photos/seed/" + name + "/800/500";
+
+            const newWish = { 
+                name: name, 
+                text: msg, 
+                avatar: finalizedAvatarUrl, 
+                mediaType: finalizedGiftType, 
+                mediaSrc: finalizedGiftUrl 
+            };
+
+            if (isPrivate) { 
+                privateWishes.push(newWish); 
+                alert("🔒 Wish Sent Securely & Privately to Arvind's Vault!"); 
+            } else { 
+                publicWishes.unshift(newWish); 
+                alert("✨ Wish Locked & Floated into Public Galaxy Successfully!"); 
+            }
+            closeWishModal(); 
+        }
+    </script>
+</body>
+</html>
